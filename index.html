@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="background">
+      <div class="row">
+        <div class="card">
+          <h1 class="title-heading">Book a Call</h1>
+          <p class="caption">Book a slot and our representative will call you within 1hr of selected time.</p>
+          <form onsubmit="onSaveToLocalStorage(event)">
+            <label>Name:</label>
+            <br>
+            <input type="text" name="name">
+            <br>
+            <label>Email:</label>
+            <br>
+            <input type="text" name="email">
+            <br>
+            <label>Phone:</label>
+            <br>
+            <input type="number" name="phone">
+            <br>
+            
+            <button>Submit</button>
+          </form>
+        </div>
+        <ul id="list-items"></ul>
+      </div>
+    </div>
+    <script>
+      function onSaveToLocalStorage(event){
+        event.preventDefault();
+        const name=event.target.name.value;
+        const email=event.target.email.value;
+        const phone=event.target.phone.value;
+        const obj={
+          name,
+          email,
+          phone
+        }
+        localStorage.setItem(obj.email,JSON.stringify(obj));
+        showUserOnScreen(obj);
+      }
+      function showUserOnScreen(obj){
+        const parentEl=document.getElementById("list-items");
+        parentEl.innerHTML=parentEl.innerHTML+`<li>${obj.name} - ${obj.email} - ${obj.phone}</li>`;
+        
+      }
+    </script>
+  </body>
+</html>
