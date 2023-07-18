@@ -12,7 +12,7 @@
           <form onsubmit="onSaveToLocalStorage(event)">
             <label>Name:</label>
             <br>
-            <input type="text" name="name">
+            <input type="text" name="name" id="name">
             <br>
             <label>Email:</label>
             <br>
@@ -20,7 +20,7 @@
             <br>
             <label>Phone:</label>
             <br>
-            <input type="number" name="phone">
+            <input type="number" name="phone" id="phone">
             <br>
             
             <button>Submit</button>
@@ -58,7 +58,19 @@
           localStorage.removeItem(obj.email);
           parentEl.removeChild(childEl);
         }        
+        const editBtn=document.createElement("input");
+        editBtn.type="button";
+        editBtn.value="Edit";
+        editBtn.onclick=() => {
+          localStorage.removeItem(obj.email);
+          parentEl.removeChild(childEl);
+          document.getElementById("name").value=obj.name;
+          document.getElementById("email").value=obj.email;
+          document.getElementById("phone").value=obj.phone;
+
+        }
         childEl.appendChild(deleteBtn);
+        childEl.appendChild(editBtn);
         parentEl.appendChild(childEl);
       }
       
