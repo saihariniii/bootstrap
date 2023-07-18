@@ -16,7 +16,7 @@
             <br>
             <label>Email:</label>
             <br>
-            <input type="text" name="email">
+            <input type="text" id="email" name="email">
             <br>
             <label>Phone:</label>
             <br>
@@ -24,8 +24,10 @@
             <br>
             
             <button>Submit</button>
+            
           </form>
         </div>
+        
         <ul id="list-items"></ul>
       </div>
     </div>
@@ -36,18 +38,30 @@
         const email=event.target.email.value;
         const phone=event.target.phone.value;
         const obj={
-          name,
-          email,
-          phone
-        }
+            name,
+            email,
+            phone
+          }
+        
+        
         localStorage.setItem(obj.email,JSON.stringify(obj));
         showUserOnScreen(obj);
       }
       function showUserOnScreen(obj){
         const parentEl=document.getElementById("list-items");
-        parentEl.innerHTML=parentEl.innerHTML+`<li>${obj.name} - ${obj.email} - ${obj.phone}</li>`;
-        
+        const childEl=document.createElement("li");
+        childEl.textContent=obj.name+' - '+obj.email+' - '+obj.phone;
+        const deleteBtn=document.createElement("input");
+        deleteBtn.type="button";
+        deleteBtn.value="Delete";
+        deleteBtn.onclick=()=>{
+          localStorage.removeItem(obj.email);
+          parentEl.removeChild(childEl);
+        }        
+        childEl.appendChild(deleteBtn);
+        parentEl.appendChild(childEl);
       }
+      
     </script>
   </body>
 </html>
